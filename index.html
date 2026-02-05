@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Pacifico&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="hearts-container"></div>
+
+    <main class="glass-card" id="main-content">
+        <!-- Screen 1: The Question -->
+        <section id="question-screen">
+            <div class="image-wrapper">
+                <img src="./images/valentine-s-day-digital-art-with-romantic-couple.jpg" alt="Cute Kitten"
+                    id="valentine-cat">
+            </div>
+            <h1 class="title">Will you be my Valentine?</h1>
+            <p class="subtitle">I've been waiting for this moment... ✨</p>
+            <div class="btn-group">
+                <button id="yes-btn" class="btn btn-yes">Yes! ❤️</button>
+                <button id="no-btn" class="btn btn-no">No 💔</button>
+            </div>
+        </section>
+
+        <!-- Screen 2: The Loading & Celebration -->
+        <section id="celebration-screen" class="hidden">
+            <div class="image-wrapper">
+                <img src="./images/hero.jpg" alt="Happy Panda" id="celebration-panda">
+            </div>
+            <h2 id="loading-text" class="title">Measuring our Love...</h2>
+
+            <div class="loading-bar-container">
+                <div id="loading-bar"></div>
+            </div>
+
+            <div id="cringe-content" class="hidden">
+                <h2 class="title pink-text">OMG YAYAYAY!!! 💖</h2>
+                <div class="cringe-text">
+                    <p>Loading love: 1000% COMPLETE!</p>
+                    <p>You're stuck with me forever now! 🥰</p>
+                    <p>Can't wait for Feb 14th! 🌹✨</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
