@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create sparkles on open
                     createSparkles(this);
 
-                    // Show love note after some boxes are opened
-                    if (openedCount === 5) {
+                    // Show love note after all boxes are opened
+                    if (openedCount === 3) {
                         setTimeout(() => {
                             const loveNote = document.getElementById('love-note');
                             loveNote.classList.remove('hidden');
