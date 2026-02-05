@@ -86,5 +86,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Intensify hearts
         setInterval(createHeart, 100);
+
+        setupGiftInteractions();
+    }
+
+    function setupGiftInteractions() {
+        const giftBoxes = document.querySelectorAll('.gift-box');
+        let openedCount = 0;
+
+        giftBoxes.forEach(box => {
+            box.addEventListener('click', function () {
+                if (!this.classList.contains('open')) {
+                    this.classList.add('open');
+                    openedCount++;
+
+                    // Create sparkles on open
+                    createSparkles(this);
+
+                    // Show love note after some boxes are opened
+                    if (openedCount === 5) {
+                        setTimeout(() => {
+                            const loveNote = document.getElementById('love-note');
+                            loveNote.classList.remove('hidden');
+                            loveNote.scrollIntoView({ behavior: 'smooth' });
+
+                            // Add some extra floating hearts for the reveal
+                            for (let i = 0; i < 20; i++) setTimeout(createHeart, i * 100);
+                        }, 1000);
+                    }
+                }
+            });
+        });
+    }
+
+    function createSparkles(element) {
+        const rect = element.getBoundingClientRect();
+        for (let i = 0; i < 15; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = (rect.left + rect.width / 2) + 'px';
+            sparkle.style.top = (rect.top + rect.height / 2) + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '2000';
+            sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            sparkle.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                const angle = Math.random() * Math.PI * 2;
+                const dist = Math.random() * 150 + 50;
+                sparkle.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) scale(0)`;
+                sparkle.style.opacity = '0';
+            }, 50);
+
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+    }
+
+    const hugBtn = document.getElementById('hug-btn');
+    if (hugBtn) {
+        hugBtn.addEventListener('click', () => {
+            // Mega heart explosion
+            for (let i = 0; i < 60; i++) {
+                setTimeout(createHeart, i * 30);
+            }
+            hugBtn.innerHTML = "Aww! I love you too! 🥰💖";
+            hugBtn.disabled = true;
+            hugBtn.style.transform = "scale(1.1)";
+
+            // Add a sweet message change
+            const title = document.querySelector('.love-note-section .title');
+            title.textContent = "You're my everything! ❤️";
+        });
     }
 });
