@@ -137,13 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizData = [
         {
             question: "Who is the boss in this relationship? 😎",
-            options: ["You", "Me", "Neither of us"],
-            correct: 1 // "Me"
+            options: ["Her", "I", "Neither of us"],
+            correct: 0 // "Her"
         },
         {
             question: "Who loves to irritate or annoy? 😜",
-            options: ["Him", "Me", "Both"],
-            correct: 0 // "Him"
+            options: ["Me", "Her", "Both of us"],
+            correct: 0 // "Me"
         },
         {
             question: "Where do I plan to settle? 🌍",
