@@ -57,12 +57,66 @@
                         <div class="gift-box" data-index="1">
                             <div class="gift-lid"></div>
                             <div class="gift-body">?</div>
-                            <div class="gift-content">8</div>
+                            <div class="gift-content">❓</div>
                         </div>
                         <div class="gift-box" data-index="2">
                             <div class="gift-lid"></div>
                             <div class="gift-body">?</div>
-                            <div class="gift-content">3</div>
+                            <div class="gift-content">🎲</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Overlays -->
+                <div id="overlay-1" class="overlay">
+                    <button class="close-overlay">&times;</button>
+                    <div class="overlay-content">
+                        <img src="https://images.unsplash.com/photo-1591880911020-f024058f977b?auto=format&fit=crop&q=80&w=500"
+                            alt="Bouquet" class="bouquet-img">
+                        <h2 class="title pink-text">A Big Bouquet for You! 💐</h2>
+                        <div class="letter-text">
+                            <p>To the man who knows how to open doors (literally and figuratively),</p>
+                            <p>I’m not usually the type to write letters or make websites, but then again, you aren’t
+                                exactly the type of man I’m used to.</p>
+                            <p>For a long time, I was walking in a shadow—dealing with "bad characters" and "ah"
+                                messages that didn't mean anything. I thought that was just how things were. But then
+                                tuesday happened. You showed up with your "good outfits," your "comfort zone" vibes and
+                                a level of respect that I didn't have to ask for.</p>
+                            <p>Seeing how you care for your dog and how you handled your own stress this week showed me
+                                something important: Character isn't just a word; it’s an action. I’ve spent the last
+                                few days focusing on myself—brightening my face, toning my triceps, and finding my own
+                                strength. But I realized that while I’m perfectly fine standing on my own, I’d much
+                                rather stand next to someone who treats me like a prize.</p>
+                            <p>You asked me if your gift was a chain or a ring. You’ll have to wait until the 13th for
+                                the final answer, but here is your first gift: My full attention. I’m so glad you’re the
+                                one waiting for me there.</p>
+                            <p>Thank you for being the "Good Character" in my story. Now, let's start a new chapter.</p>
+                            <p>and i've something else call me</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="overlay-2" class="overlay">
+                    <button class="close-overlay">&times;</button>
+                    <div class="overlay-content">
+                        <h2 class="title pink-text">Quick Quiz Time! 🧠</h2>
+                        <div class="quiz-card" id="quiz-container">
+                            <!-- Quiz content will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="overlay-3" class="overlay">
+                    <button class="close-overlay">&times;</button>
+                    <div class="overlay-content">
+                        <h2 class="title pink-text">Truth or Dare? 🎲</h2>
+                        <div class="td-container">
+                            <p class="subtitle">Pick your poison...</p>
+                            <div class="td-btn-group">
+                                <button class="btn btn-yes" onclick="playTD('truth')">Truth 😇</button>
+                                <button class="btn btn-no" onclick="playTD('dare')">Dare 😈</button>
+                            </div>
+                            <div id="td-result" class="td-result"></div>
                         </div>
                     </div>
                 </div>

@@ -92,36 +92,144 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setupGiftInteractions() {
         const giftBoxes = document.querySelectorAll('.gift-box');
-        let openedCount = 0;
+        const overlays = document.querySelectorAll('.overlay');
+        const closeBtns = document.querySelectorAll('.close-overlay');
 
-        giftBoxes.forEach(box => {
+        giftBoxes.forEach((box, index) => {
             box.addEventListener('click', function () {
                 if (!this.classList.contains('open')) {
                     this.classList.add('open');
-                    openedCount++;
-
-                    // Create sparkles on open
                     createSparkles(this);
 
-                    // Show love note after all boxes are opened
-                    if (openedCount === 3) {
-                        setTimeout(() => {
-                            const loveNote = document.getElementById('love-note');
-                            loveNote.classList.remove('hidden');
-                            loveNote.scrollIntoView({ behavior: 'smooth' });
+                    // Delay opening the overlay slightly for the animation
+                    setTimeout(() => {
+                        const overlayId = `overlay-${index + 1}`;
+                        document.getElementById(overlayId).classList.add('active');
 
-                            // Add some extra floating hearts for the reveal
-                            for (let i = 0; i < 20; i++) setTimeout(createHeart, i * 100);
-                        }, 1000);
-                    }
+                        if (index === 1) initQuiz(); // Box 2 is the quiz
+                    }, 800);
+                } else {
+                    // If already open, just show overlay again
+                    const overlayId = `overlay-${index + 1}`;
+                    document.getElementById(overlayId).classList.add('active');
+                    if (index === 1) initQuiz();
                 }
+            });
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('.overlay').classList.remove('active');
             });
         });
     }
 
+    // --- Quiz Logic ---
+    const quizData = [
+        {
+            question: "Who is the boss in this relationship? 😎",
+            options: ["You", "Me", "Neither of us"],
+            correct: 1 // "Me"
+        },
+        {
+            question: "Who loves to irritate or annoy? 😜",
+            options: ["Him", "Me", "Both"],
+            correct: 0 // "Him"
+        },
+        {
+            question: "Where do I plan to settle? 🌍",
+            options: ["Moon", "His Heart", "Africa"],
+            correct: 1 // "His Heart"
+        }
+    ];
+
+    let currentQuestion = 0;
+
+    function initQuiz() {
+        currentQuestion = 0;
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const container = document.getElementById('quiz-container');
+        const q = quizData[currentQuestion];
+
+        container.innerHTML = `
+            <div class="quiz-question">${q.question}</div>
+            <div class="quiz-options">
+                ${q.options.map((opt, i) => `
+                    <div class="quiz-option" onclick="checkAnswer(${i})">${opt}</div>
+                `).join('')}
+            </div>
+            <div id="quiz-feedback" style="margin-top: 1.5rem; font-weight: 600; min-height: 1.5rem;"></div>
+        `;
+    }
+
+    window.checkAnswer = function (choice) {
+        const feedback = document.getElementById('quiz-feedback');
+        const options = document.querySelectorAll('.quiz-option');
+
+        if (choice === quizData[currentQuestion].correct) {
+            options[choice].classList.add('correct');
+            feedback.innerHTML = "Correct! ✨ Moving to next...";
+            feedback.style.color = "#28a745";
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    showQuestion();
+                } else {
+                    document.getElementById('quiz-container').innerHTML = `
+                        <h3 class="title pink-text">Quiz Complete! 💖</h3>
+                        <p>You know me so well! 🥰</p>
+                    `;
+                }
+            }, 1500);
+        } else {
+            options[choice].classList.add('wrong');
+            feedback.innerHTML = "Oho, try again! 🤭";
+            feedback.style.color = "#dc3545";
+
+            setTimeout(() => {
+                feedback.innerHTML = "";
+                options[choice].classList.remove('wrong');
+            }, 1000);
+        }
+    };
+
+    // --- Truth or Dare Logic ---
+    const tdData = {
+        truth: [
+            "What was your first impression of me?",
+            "What's one thing you're most afraid of losing?",
+            "What's the most romantic thing you've ever thought about us?",
+            "If you could change one thing about our first meeting, what would it be?",
+            "What's your favorite memory of us together?"
+        ],
+        dare: [
+            "Send me a voice note saying something sweet right now!",
+            "Take a silly selfie and send it to me!",
+            "Call me and tell me you love me!",
+            "Write a 3-line poem about my eyes.",
+            "Post a picture of us (or just me) on your status with a cute caption!"
+        ]
+    };
+
+    window.playTD = function (type) {
+        const result = document.getElementById('td-result');
+        const items = tdData[type];
+        const randomItem = items[Math.floor(Math.random() * items.length)];
+
+        result.style.opacity = '0';
+        setTimeout(() => {
+            result.innerHTML = `<strong>${type.toUpperCase()}:</strong> ${randomItem}`;
+            result.style.opacity = '1';
+        }, 300);
+    };
+
     function createSparkles(element) {
         const rect = element.getBoundingClientRect();
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 20; i++) {
             const sparkle = document.createElement('div');
             sparkle.innerHTML = '✨';
             sparkle.style.position = 'fixed';
@@ -129,14 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
             sparkle.style.top = (rect.top + rect.height / 2) + 'px';
             sparkle.style.pointerEvents = 'none';
             sparkle.style.zIndex = '2000';
-            sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
-            sparkle.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            sparkle.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            sparkle.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 
             document.body.appendChild(sparkle);
 
             setTimeout(() => {
                 const angle = Math.random() * Math.PI * 2;
-                const dist = Math.random() * 150 + 50;
+                const dist = Math.random() * 200 + 50;
                 sparkle.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) scale(0)`;
                 sparkle.style.opacity = '0';
             }, 50);
