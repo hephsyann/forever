@@ -340,12 +340,33 @@ body {
     color: var(--text);
     text-align: left;
     background: #fffafa;
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 20px;
     border: 1px solid #ffe5ec;
     box-shadow: 0 10px 30px rgba(255, 77, 109, 0.05);
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 2rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Love Scrollbar Styling */
+.letter-text::-webkit-scrollbar {
+    width: 8px;
+}
+
+.letter-text::-webkit-scrollbar-track {
+    background: #fff0f3;
+    border-radius: 10px;
+}
+
+.letter-text::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+.letter-text::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
 }
 
 @media (max-width: 480px) {
