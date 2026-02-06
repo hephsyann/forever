@@ -91,11 +91,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupGiftInteractions() {
-        const giftBoxes = document.querySelectorAll('.gift-box');
+        const giftGrid = document.querySelector('.gift-grid');
+        const giftBoxes = Array.from(document.querySelectorAll('.gift-box'));
         const overlays = document.querySelectorAll('.overlay');
         const closeBtns = document.querySelectorAll('.close-overlay');
 
-        giftBoxes.forEach((box, index) => {
+        // Shuffle gift boxes
+        for (let i = giftBoxes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            giftGrid.appendChild(giftBoxes[j]);
+            [giftBoxes[i], giftBoxes[j]] = [giftBoxes[j], giftBoxes[i]];
+        }
+
+        giftBoxes.forEach((box) => {
+            const index = parseInt(box.getAttribute('data-index'));
             box.addEventListener('click', function () {
                 if (!this.classList.contains('open')) {
                     this.classList.add('open');
